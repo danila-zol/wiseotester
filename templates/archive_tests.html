@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex flex-wrap">
+        {% for i in complete_tests %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{i[0]}}</h5>
+                <form action="/test{{i.id}}" method="post">
+                    <button type="submit" disabled="disabled" class="btn btn-outline-secondary">Пройти</button>
+                    <p>
+                        <br>
+                        <mark>ПРОЙДЕНО</mark>
+                        <mark>{{i[1]}}</mark>
+                    </p>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

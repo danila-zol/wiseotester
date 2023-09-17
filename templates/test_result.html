@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Вопрос</th>
+            <th scope="col" class="text-danger">Ваш ответ</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in questions_test_history%}
+        <tr>
+{% if i.user_answer != i.true_answer %}
+            <td>{{i.title}}</td>
+            <td class="text-danger">{{i.user_answer}}</td>
+{% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+        <h2 class="display-4 ">Ваш результат {{message}}</h2></p>
+    </table>
+</div>
+{% endblock %}

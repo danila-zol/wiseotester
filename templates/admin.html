@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="display-4 ">{{message}}</h2>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="lectionAddCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                        aria-controls="collapseOne">
+                        Добавить лекцию
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <form action="/addLecture" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="title" id="titleInput" placeholder="Заголовок"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="text" id="textInput" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="lvl" id="nameInput"
+                                placeholder="Уровень сложности(от 0 до 100) оставьте пустым если лекция должна быть доступна всем" >
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="testAddCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        Добавить тест
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <form action="/addTest" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" id="nameInput"
+                                placeholder="Название теста" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="attemptsCount" id="nameInput"
+                                placeholder="Количество попыток" aria-valuemin="1" aria-valuemax="100" >
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="lvl" id="nameInput"
+                                placeholder="Уровень сложности(от 0 до 100) оставьте пустым если тест должен быть доступен всем" >
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="questionAddCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        Добавить вопрос в тест
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <form action="/addQuestionInTest" method="post">
+                        <select name="testId" class="form-select" aria-label="Default select example" required>
+                            {% for i in tests_list %}
+                            <option value={{i.id}}>{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <br>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="questionName" id="questionNameInput"
+                                placeholder="Вопрос" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="answer1" id="answer1Input"
+                                placeholder="Вариант ответа 1" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="answer2" id="answer2Input"
+                                placeholder="Вариант ответа 2" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="answer3" id="answer3Input"
+                                placeholder="Вариант ответа 3" >
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="answer4" id="answer4Input"
+                                placeholder="Вариант ответа 4" >
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="answer5" id="answer4Input"
+                                placeholder="Вариант ответа 5" >
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="answer6" id="answer4Input"
+                                placeholder="Вариант ответа 6" >
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="trueAnswer" id="answer4Input"
+                                placeholder="Введите правильный вариант ответа "  required>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function addInput() {
+        if (x < 10) {
+            var str = '<input type="text" class="link" placeholder="Ссылка на профиль *"> <input type="text" class="amount" placeholder="Кол-во"> <div id="input' + (x + 1) + '"></div>';
+            document.getElementById('input' + x).innerHTML = str;
+            x++;
+        } else {
+            alert('STOP it!');
+        }
+    }
+
+</script>
+
+{% endblock %}

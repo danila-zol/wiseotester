@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+      .unselectable {
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      }
+</style>
+<div class="container">
+    <form action="/next_question" method="post">
+        <input name="subject" value="{{question_history.subject}}" hidden>
+        <input name="question_history_id" value="{{question_history.id}}" hidden>
+        <input name="title_after_change" value="{{question_history.title}}" hidden>
+        <h5 class="card-title unselectable">{{question_history.title}}</h5>
+        {% if question_history.img != 0 %}
+        <img src="/static/img/{{question_history.img}}.png" width="240" height="180"/>
+        {% endif %}
+        {% for i in answers %}
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="{{i.text,id_data}}" name="answer" id="{{loop.index}}id"
+                   required>
+            <label class="form-check-label unselectable" for="{{loop.index}}id">
+                {{i.text}}
+            </label>
+        </div>
+        <br>
+        {% endfor %}
+        <button type="submit" class="btn btn-info">Следующий вопрос</button>
+    </form>
+</div>
+{% endblock %}

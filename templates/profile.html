@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h class="h2">{{user.name}} <small class="text-muted"></small></h>
+    </p>
+
+<!--    <p>Пройдено лекций <span class="btn btn-outline-secondary">{{complete_lectures_count}}/{{lectures_count}}</span> <a-->
+<!--            class="btn btn-outline-secondary" href="/archive_lectures" role="button">архив</a></p>-->
+    <p>Пройдено тестов <span class="btn btn-outline-secondary">{{tests}}</span>
+<!--            class="btn btn-outline-secondary" href="/archive_tests" role="button">архив</a></p>-->
+
+    <div class="alert alert-info" role="alert">
+        Ваш средний балл в тестах : 
+    </div>
+
+    <label>Ваш прогресс:</label>
+    <div class="progress">
+
+        <div class="progress-bar progress-b ar-striped progress-bar-animated" role="progressbar"
+             aria-valuenow={{progress_bar_percent}}
+             aria-valuemin="0" aria-valuemax="100" style="width: {{progress_bar_percent}}% "></div>
+    </div>
+
+    <br>
+<!--    <form action="/recommendations" method="post">-->
+<!--        <button type="submit" class="btn btn-info">Рекомендации</button>-->
+<!--    </form>-->
+</div>
+
+{% endblock %}

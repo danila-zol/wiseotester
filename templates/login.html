@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if message %}
+    <h2 class="display-4 ">{{message}}</h2></p>
+    {% endif %}
+    <form action="/login" method="post">
+        <label class="form-label ">Войти в систему</label>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Логин" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Пароль"
+                   required>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary mb-2">Войти</button>
+        </div>
+    </form>
+    <form action="/registration">
+        <button type="submit" class="btn btn-outline-secondary">Зарегистрироваться</button>
+    </form>
+</div>
+
+{% endblock %}
