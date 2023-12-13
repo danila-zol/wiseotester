@@ -1,0 +1,77 @@
+# Authentication
+
+Client <- Server
+GET /
+{
+    "userid" : "FooBar",
+    "subjects" : [{"subject_title" : "String", "endpoint" : "URL"},...]
+}
+
+# For professor to see the tests
+Client <- Server
+GET /SOME_SUBJECT (see endpoint in server response)
+{
+    "tests" : [
+        {
+            "test_title" : "String",
+            "challenges" : [
+                {
+                    "prompt" : "SOME_QUESTION",
+                    "illustration" : "SOME_PICTURE",
+                    "correct_response" : "SOME_RESPONSE"
+                },
+                ...
+            ]
+        },
+        ...
+    ]
+}
+
+# For student to do the tests
+Client <- Server
+GET /SOME_SUBJECT
+{
+    "tests" : [
+        {
+            "test_title" : "String",
+            "test_id" : UUID,
+            "challenges" : [
+                {
+                    "question_id" : UUID,
+                    "prompt" : "SOME_QUESTION",
+                    "illustration" : "SOME_PICTURE",
+                },
+                ...]
+        },
+    ...
+    ]
+}
+
+Client -> Server
+POST /SOME_SUBJECT
+{
+    "test_id" : UUID,
+    "question_id" : UUID,
+    "student_answer" : "SOME_ANSWER"
+}
+
+Client <- Server
+Response
+{
+    "test_id" : UUID,
+    "question_id" : UUID,
+    "answer_correct" : "True|False"
+}
+
+Client -> Server
+POST /SOME_SUBJECT/result
+{
+    "test_id" : UUID
+}
+
+Client <- Server
+Response
+{
+    "correct_rate" : int,
+    ...
+}
