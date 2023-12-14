@@ -17,11 +17,12 @@ class Preproc:
         self.preproc()
 
         # Tokenization
-        self.dataset_full["context"] = self.dataset_full["context"].apply(self.nlp)
+        self.dataset_full["context_tokenized"] = self.dataset_full["context"].apply(self.nlp)
         self.dataset_full["question_tokenized"] = self.dataset_full["question"].apply(self.nlp)
         self.dataset_full["answers_tokenized"] = self.dataset_full["answers_text"].apply(self.nlp)
         
         # Vectorisation
+        self.dataset_full["context_vectors"] = self.dataset_full["context_tokenized"].apply(lambda x: list(map(lambda y: y.vector, x)))
         self.dataset_full["question_vectors"] = self.dataset_full["question_tokenized"].apply(lambda x: list(map(lambda y: y.vector, x)))
         self.dataset_full["question_vectors"] = self.dataset_full["answers_tokenized"].apply(lambda x: list(map(lambda y: y.vector, x)))
 
