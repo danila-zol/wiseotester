@@ -1,18 +1,17 @@
 class Preproc:
-    def __init__(self, dataset=None):
+    def __init__(self, crop_amount=3000):
         # Importing libraries
         import spacy
-        # from nltk.corpus import stopword
+        from datasets import load_dataset
         
         # Various utilities initialization
         self.nlp = spacy.load('en_core_web_sm')
 
         # Dataset initialization
-        if dataset:
-            self.dataset_full = dataset
-        else:
-            from datasets import load_dataset
-            self.dataset_full = load_dataset("squad", split="train").to_pandas()
+        self.dataset_full = load_dataset("squad", split="train").to_pandas()
+
+        # Cropping the dataset
+        self.dataset_full = self.dataset_full.head(crop_amount).copy()
         
         # Dataset preprocessing
         self.preproc()
